@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/_template.xhtml">
+	<ui:define name="content">
+		<p:messages id="msg">
+			<p:autoUpdate />
+		</p:messages>
+		<h:form>
+		<!-- DATA VIEW, AVATAR NA OUTRA LISTAGEM -->
+			<div class="card" style="margin: 1em">
+				<p:dataTable var="setup" value="#{setupBean.getUserSetups()}" editable="true">
+				
+				 	<p:ajax event="rowEdit" listener="#{setupBean.edit()}" update="msg"/>
+				
+					<p:column>
+						<img src="${request.contextPath}${setup.imagePath}" style="width: 120px"/>
+					</p:column>
+					
+					<p:column headerText="Code">
+						<h:outputText value="#{setup.id}" />
+					</p:column>
+
+					<p:column headerText="Name">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{setup.name}" />
+							</f:facet>
+							
+							<f:facet name="input">
+								<p:inputText value="#{setup.name}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText="Description">
+						<h:outputText value="#{setup.description}" />
+					</p:column>
+
+					<p:column headerText="Price">
+						<h:outputText value="#{setup.price}" />
+					</p:column>
+					
+					<p:column>
+						<p:commandButton 
+							action="#{setupBean.delete(setup)}" 
+							title="Delete setup" 
+							icon="pi pi-trash" 
+							styleClass="rounded-button ui-button-danger ui-button-flat" />
+					</p:column>
+					
+					<p:column style="width:6rem">
+		                <p:rowEditor editTitle="Edit Row" cancelTitle="Cancel Edit" saveTitle="Save Row"/>
+		            </p:column>
+					
+				</p:dataTable>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

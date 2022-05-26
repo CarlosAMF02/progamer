@@ -41,7 +41,7 @@ public class SetupBean {
 		dao.create(setup);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Setup cadastrado com sucesso"));
 		
-		return "setups";
+		return "my_setups";
 	}
 	
 	public List<Setup> getSetups() {

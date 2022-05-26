@@ -53,7 +53,7 @@ public class UserBean {
 				.getSessionMap()
 				.put("user", userLogged);
 			
-			return "setups";
+			return "my_setups";
 		}
 		
 		mostrarMensagem();
